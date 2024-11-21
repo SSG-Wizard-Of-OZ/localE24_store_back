@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.oz.locale24_store_back.common.domain.BasicEntity;
-import org.oz.locale24_store_back.eventproduct.domain.EventProductEntity;
+import org.oz.locale24_store_back.product.domain.EventProductEntity;
 import org.oz.locale24_store_back.storeevent.domain.StoreEventEntity;
 
 import java.util.Date;
@@ -36,6 +36,7 @@ public class StoreEventProductOrderEntity extends BasicEntity {
     private String orderName;
 
     @Column(name = "order_status")
+    @Builder.Default
     private OrderStatus orderStatus = OrderStatus.PENDING;
 
     @Column(name = "period_date")

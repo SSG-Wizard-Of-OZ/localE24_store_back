@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.oz.locale24_store_back.common.domain.BasicEntity;
 import org.oz.locale24_store_back.common.domain.BasicStatus;
+import org.oz.locale24_store_back.store.domain.StoreEntity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,25 +24,34 @@ public class EventEntity extends BasicEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_no", nullable = false)
-    private Long eventNo;
+    private Long eno;
 
     @Column(name = "event_name")
-    private String eventName;
+    private String ename;
 
     @Column(name = "event_maker")
-    private String eventMaker;
+    private String maker;
 
     @Column(name = "event_start")
-    private Date eventStart;
+    private LocalDate startDate;
 
     @Column(name = "event_end")
-    private Date eventEnd;
+    private LocalDate endDate;
 
     @Column(name = "event_space_rent")
-    private String eventSpaceRent;
+    private boolean useSpace;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private StoreEntity store;
+
+    private String tags;
 
     @Enumerated(EnumType.ORDINAL)
     @Builder.Default
     @Column(name = "event_status", columnDefinition = "INT DEFAULT 0")
-    private BasicStatus eventStatus = BasicStatus.PENDING;
+    private EventStatus status = EventStatus.PENDING;
+
+
+
 }
