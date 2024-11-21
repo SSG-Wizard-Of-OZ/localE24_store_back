@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.oz.locale24_store_back.common.domain.BasicEntity;
 import org.oz.locale24_store_back.event.domain.EventEntity;
-import org.oz.locale24_store_back.store.domain.StoreInfoEntity;
+import org.oz.locale24_store_back.store.domain.StoreEntity;
 
 @Entity
 @Table(name = "store_event")
@@ -25,9 +25,10 @@ public class StoreEventEntity extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_no", referencedColumnName = "store_no")
-    private StoreInfoEntity storeNo;
+    private StoreEntity storeNo;
 
     @Column(name = "event_matching_status")
+    @Builder.Default
     private StoreEventStatus eventMatchingStatus = StoreEventStatus.PENDING;
 
 }

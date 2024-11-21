@@ -10,12 +10,12 @@ import org.oz.locale24_store_back.common.domain.BasicEntity;
 import org.oz.locale24_store_back.localmaneger.domain.LocalManager;
 
 @Entity
-@Table(name = "store_info")
+@Table(name = "tbl_store")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StoreInfoEntity extends BasicEntity {
+public class StoreEntity extends BasicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,22 +31,22 @@ public class StoreInfoEntity extends BasicEntity {
     private AreaCode areaCode;
 
     @Column(name = "store_name")
-    private String storeName;
+    private String name;
 
     @Column(name = "store_call")
     private String storeCall;
 
     @Column(name = "store_addr")
-    private String storeAddr;
+    private String addr;
 
     @Column(name = "store_latitude")
-    private String storeLatitude;
+    private double lat;
 
     @Column(name = "store_longitude")
-    private String storeLongitude;
+    private double lng;
 
     @Column(name = "store_space_status")
-    private Boolean storeSpaceStatus;
+    private Boolean useSpace;
 
 
 }
