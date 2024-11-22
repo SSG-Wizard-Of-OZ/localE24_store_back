@@ -10,6 +10,8 @@ import org.oz.locale24_store_back.event.dto.EventListRequestDTO;
 import org.oz.locale24_store_back.store.domain.StoreEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -22,16 +24,17 @@ public class EventRepositoryTests {
     private EventEntityRepository eventEntityRepository;
 
     @Test
+
     public void testMakeEvent() {
 
-        //for (long i = 1; i < 10; i++) {
+        for (long i = 1; i < 10; i++) {
 
-            StoreEntity store = StoreEntity.builder().storeNo(3L).build();
+            StoreEntity store = StoreEntity.builder().storeNo(5L).build();
 
             EventEntity entity
                     = EventEntity.builder()
                     .store(store)
-                    .ename("TestEvent " )
+                    .ename("TestEvent " + i )
                     .useSpace(true)
                     .startDate(LocalDate.of(2025,12,01))
                     .endDate(LocalDate.of(2025,12,31))
@@ -39,7 +42,7 @@ public class EventRepositoryTests {
 
             eventEntityRepository.save(entity);
 
-        //}//end for
+        }//end for
 
     }
 
