@@ -43,6 +43,7 @@ public class EventEntity extends BasicEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_no", referencedColumnName = "store_no")
     private StoreEntity store;
 
     private String tags;

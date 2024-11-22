@@ -2,14 +2,13 @@ package org.oz.locale24_store_back.product.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.oz.locale24_store_back.product.domain.EventProductEntity;
+import org.oz.locale24_store_back.product.domain.ProductEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Data
-public class EventProductListDTO {
+public class ProductListDTO {
 
     private Long pno;
     private String pname;
@@ -18,7 +17,7 @@ public class EventProductListDTO {
 
     private List<String> fileNames;
 
-    public EventProductListDTO(EventProductEntity entity){
+    public ProductListDTO(ProductEntity entity){
 
         this.pno = entity.getPno();
         this.pname = entity.getPname();

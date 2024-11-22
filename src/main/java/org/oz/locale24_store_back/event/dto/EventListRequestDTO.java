@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.oz.locale24_store_back.common.dto.PageRequestDTO;
 import org.oz.locale24_store_back.event.domain.EventStatus;
-import org.oz.locale24_store_back.storeevent.domain.StoreEventStatus;
 
 @Getter
 @Setter

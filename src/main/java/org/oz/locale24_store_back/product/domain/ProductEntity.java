@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @ToString(exclude = {"attachFiles", "event"})
-public class EventProductEntity extends BasicEntity {
+public class ProductEntity extends BasicEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_product_no", nullable = false)
@@ -45,7 +45,7 @@ public class EventProductEntity extends BasicEntity {
     @Builder.Default
     @CollectionTable(
             name = "event_product_file",
-            joinColumns = @JoinColumn(name = "event_product_id")
+            joinColumns = @JoinColumn(name = "event_product_no")
     )
     private Set<AttachFile> attachFiles = new HashSet<>();
 
