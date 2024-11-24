@@ -18,11 +18,11 @@ public class RefundRepositoryTests {
 
     @Test
     public void testInsert() {
-        Long ProductNo = 15L;
+        Long ProductNo = 18L;
 
         ProductEntity productEntity = ProductEntity.builder().pno(ProductNo).build();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 30; i++) {
             RefundEntity refundEntity = RefundEntity.builder()
                     .product(productEntity)
                     .rfdesc("Refund Desc....")

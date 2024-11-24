@@ -53,6 +53,12 @@ public class EventEntity extends BasicEntity {
     @Column(name = "event_status", columnDefinition = "INT DEFAULT 0")
     private EventStatus status = EventStatus.PENDING;
 
+    public void changeApproved (){
+        this.status = EventStatus.APPROVED;
+    }
+    public void changeRejected (){
+        this.status = EventStatus.REJECTED;
+    }
 
 
 }

@@ -16,7 +16,7 @@ public class EventListRequestDTO extends PageRequestDTO {
 
     private java.time.LocalDate startDate, endDate;
 
-    private boolean useSpace;
+    private String useSpace;
 
-    private String[] keywords;
+    private String keyword;
 }

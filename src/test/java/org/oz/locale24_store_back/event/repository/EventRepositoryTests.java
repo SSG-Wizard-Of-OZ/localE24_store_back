@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.oz.locale24_store_back.common.dto.PageResponseDTO;
 import org.oz.locale24_store_back.event.domain.EventEntity;
+import org.oz.locale24_store_back.event.domain.EventStatus;
 import org.oz.locale24_store_back.event.dto.EventListDTO;
 import org.oz.locale24_store_back.event.dto.EventListRequestDTO;
 import org.oz.locale24_store_back.store.domain.StoreEntity;
@@ -27,9 +28,9 @@ public class EventRepositoryTests {
 
     public void testMakeEvent() {
 
-        for (long i = 1; i < 10; i++) {
+        for (long i = 1; i < 150; i++) {
 
-            StoreEntity store = StoreEntity.builder().storeNo(5L).build();
+            StoreEntity store = StoreEntity.builder().storeNo(3L).build();
 
             EventEntity entity
                     = EventEntity.builder()
@@ -49,7 +50,7 @@ public class EventRepositoryTests {
     @Test
     public void testList() {
 
-        Long sno = 2L;
+        Long sno = 3L;
 
         EventListRequestDTO requestDTO = EventListRequestDTO.builder()
                 .page(1)
@@ -60,10 +61,26 @@ public class EventRepositoryTests {
         PageResponseDTO<EventListDTO> response = eventEntityRepository.list(requestDTO, sno);
 
         response.getDtoList().forEach(eventListDTO -> log.info(eventListDTO));
-
-
-
     }
 
+    @Test
+    @Transactional
+    @Commit
+    public void testChangeStatus() {
+        Long eno = 144L;
+        EventStatus status = EventStatus.PENDING;
+        int clientStatus = 2;
+
+        //이부분 질문 해볼것.
+
+        if (clientStatus == 1){
+            status = EventStatus.APPROVED;
+        }
+        if (clientStatus == 2){
+            status = EventStatus.REJECTED;
+        }
+
+        eventEntityRepository.updateStatus(eno,status);
+    }
 
 }

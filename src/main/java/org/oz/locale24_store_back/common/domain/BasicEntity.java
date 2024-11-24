@@ -32,7 +32,7 @@ public abstract class BasicEntity {
     private String creator;
 
     // Soft Delete Boolean 값 변경
-    public Boolean changeDelFlag(Boolean newDelFlag){
-        return this.delFlag = newDelFlag;
+    public void changeDelFlag(Boolean newDelFlag){
+        this.delFlag = newDelFlag;
     }
 }

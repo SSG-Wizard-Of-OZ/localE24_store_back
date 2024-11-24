@@ -7,6 +7,7 @@ import org.oz.locale24_store_back.common.dto.PageRequestDTO;
 import org.oz.locale24_store_back.common.dto.PageResponseDTO;
 import org.oz.locale24_store_back.product.domain.ProductEntity;
 import org.oz.locale24_store_back.product.dto.ProductListDTO;
+import org.oz.locale24_store_back.product.dto.ProductListRequestDTO;
 import org.oz.locale24_store_back.product.dto.ProductStockListDTO;
 import org.oz.locale24_store_back.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class ProductService {
         return productEntityList.stream().map(productEntity -> new ProductListDTO(productEntity)).toList();
     }
 
-    public PageResponseDTO<ProductStockListDTO> getProductsByStore(PageRequestDTO pageRequestDTO, Long sno){
+    public PageResponseDTO<ProductStockListDTO> getProductListByStore(ProductListRequestDTO pageRequestDTO, Long sno){
         log.info("----------------------------getProductsByStore-------------");
 
         return productRepository.listAll(pageRequestDTO, sno);
