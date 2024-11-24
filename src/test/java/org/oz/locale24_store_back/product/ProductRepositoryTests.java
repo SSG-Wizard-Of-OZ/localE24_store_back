@@ -6,6 +6,8 @@ import org.oz.locale24_store_back.common.dto.PageRequestDTO;
 import org.oz.locale24_store_back.common.dto.PageResponseDTO;
 import org.oz.locale24_store_back.event.domain.EventEntity;
 import org.oz.locale24_store_back.product.domain.ProductEntity;
+import org.oz.locale24_store_back.product.dto.ProductListDTO;
+import org.oz.locale24_store_back.product.dto.ProductListRequestDTO;
 import org.oz.locale24_store_back.product.dto.ProductStockListDTO;
 import org.oz.locale24_store_back.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class ProductRepositoryTests {
     @Test
     public void insertEventProduct() {
 
-        Long eventNo = 311L;
+        Long eventNo = 148L;
 
         EventEntity eventEntity = EventEntity.builder().eno(eventNo).build();
 
@@ -55,7 +57,7 @@ public class ProductRepositoryTests {
     @Test
     public void testOfEvent() {
 
-        Long eventNo = 300L;
+        Long eventNo = 150L;
 
         List<ProductEntity> productEntityList = productRepository.getListOfEvent(eventNo);
 
@@ -70,7 +72,7 @@ public class ProductRepositoryTests {
     @Test
     public void testUpdateQuantity() {
 
-        Long pno = 10L;
+        Long pno = 12L;
 
         productRepository.updateQuantity(pno, 100);
 
@@ -80,7 +82,12 @@ public class ProductRepositoryTests {
     public void testListOfAllProducts() {
         Long storeNo = 3L;
 
-        PageRequestDTO requestDTO = new PageRequestDTO(1, 10);
+        ProductListRequestDTO requestDTO = ProductListRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .pkeyword("1")
+                .ekeyword("4")
+                .build();
         PageResponseDTO<ProductStockListDTO> productEntityList = productRepository.listAll(requestDTO,storeNo);
 
         log.info(productEntityList.toString());

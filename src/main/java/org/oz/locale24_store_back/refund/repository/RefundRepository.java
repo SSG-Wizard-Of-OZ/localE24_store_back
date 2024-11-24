@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface RefundRepository extends JpaRepository<RefundEntity,Long> {
 
-    @Query("select r from RefundEntity r left join ProductEntity p on r.product = p where p.pno = :pno")
+    @Query("select r from RefundEntity r left join ProductEntity p on r.product = p where p.pno = :pno order by r.regDate desc")
     List<RefundEntity> getListOfProduct(@Param("pno") Long pno);
+
 }

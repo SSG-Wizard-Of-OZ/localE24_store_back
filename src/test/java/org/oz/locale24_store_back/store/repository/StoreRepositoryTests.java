@@ -15,7 +15,7 @@ public class StoreRepositoryTests {
     @Autowired(required = false)
     private StoreRepository storeRepository;
 
-    @Disabled
+//    @Disabled
     @Test
     public void testInsert() {
 

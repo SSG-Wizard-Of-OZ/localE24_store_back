@@ -3,9 +3,9 @@ package org.oz.locale24_store_back.product.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.oz.locale24_store_back.common.dto.PageRequestDTO;
 import org.oz.locale24_store_back.common.dto.PageResponseDTO;
 import org.oz.locale24_store_back.product.dto.ProductListDTO;
+import org.oz.locale24_store_back.product.dto.ProductListRequestDTO;
 import org.oz.locale24_store_back.product.dto.ProductStockListDTO;
 import org.oz.locale24_store_back.product.service.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +31,10 @@ public class ProductController {
     }
 
     @GetMapping("/stock")
-    public ResponseEntity<PageResponseDTO<ProductStockListDTO>> getStockProduct(PageRequestDTO requestDTO, Long sno) {
+    public ResponseEntity<PageResponseDTO<ProductStockListDTO>> getStockProduct(ProductListRequestDTO requestDTO, Long sno) {
 
         log.info("----------------------------------" + sno);
 
-        return ResponseEntity.ok().body(productService.getProductsByStore(requestDTO, sno));
+        return ResponseEntity.ok().body(productService.getProductListByStore(requestDTO, sno));
     }
 }

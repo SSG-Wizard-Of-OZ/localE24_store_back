@@ -2,11 +2,12 @@ package org.oz.locale24_store_back.product.repository.search;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
-import org.oz.locale24_store_back.common.dto.PageRequestDTO;
+import lombok.extern.log4j.Log4j2;
 import org.oz.locale24_store_back.common.dto.PageResponseDTO;
 import org.oz.locale24_store_back.event.domain.QEventEntity;
 import org.oz.locale24_store_back.product.domain.ProductEntity;
 import org.oz.locale24_store_back.product.domain.QProductEntity;
+import org.oz.locale24_store_back.product.dto.ProductListRequestDTO;
 import org.oz.locale24_store_back.product.dto.ProductStockListDTO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +16,14 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 
 import java.util.List;
 
+@Log4j2
 public class ProductEntitySearchImpl extends QuerydslRepositorySupport implements ProductEntitySearch {
     public ProductEntitySearchImpl() {
         super(ProductEntity.class);
     }
 
     @Override
-    public PageResponseDTO<ProductStockListDTO> listAll(PageRequestDTO pageRequestDTO, Long sno) {
+    public PageResponseDTO<ProductStockListDTO> listAll(ProductListRequestDTO pageRequestDTO, Long sno) {
         QProductEntity productEntity = QProductEntity.productEntity;
         QEventEntity eventEntity = QEventEntity.eventEntity;
 
@@ -33,6 +35,19 @@ public class ProductEntitySearchImpl extends QuerydslRepositorySupport implement
         JPQLQuery<ProductEntity> query = from(productEntity);
         query.leftJoin(eventEntity).on(productEntity.event.eq(eventEntity));
         query.where(eventEntity.store.storeNo.eq(sno));
+        query.where(eventEntity.delFlag.eq(false));
+
+        log.info(pageRequestDTO);
+        // 상품키워드 검색
+        if (pageRequestDTO.getPkeyword() != null){
+            String keyword = "%" + pageRequestDTO.getPkeyword() + "%";
+            query.where(productEntity.pname.like(keyword));
+        }
+        // 이벤트키워드 검색
+        if (pageRequestDTO.getEkeyword() != null){
+            String keyword = "%" + pageRequestDTO.getEkeyword() + "%";
+            query.where(eventEntity.ename.like(keyword));
+        }
 
         this.getQuerydsl().applyPagination(pageable, query);
 
